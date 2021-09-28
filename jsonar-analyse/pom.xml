@@ -31,6 +31,12 @@
             <version>${javaparser.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.kamijoucen</groupId>
+            <artifactId>jsonar-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
     <properties>
@@ -40,6 +46,5 @@
 
     <build>
         <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
-        <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
     </build>
 </project>
