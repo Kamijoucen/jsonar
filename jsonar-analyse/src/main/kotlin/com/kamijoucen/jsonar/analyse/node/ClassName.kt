@@ -7,8 +7,16 @@ data class ClassName(
     val packageName: String = "",
 )
 
-fun ClassName.fullName() = if (StringUtils.isBlank(packageName)) {
-    name
+/**
+ * 类是否有全名
+ */
+fun ClassName.hasFullName() = StringUtils.isNotBlank(packageName)
+
+/**
+ * 获取类的全名
+ */
+fun ClassName.fullName() = if (this.hasFullName()) {
+    "$packageName.$name"
 } else {
-    packageName + name
+    name
 }

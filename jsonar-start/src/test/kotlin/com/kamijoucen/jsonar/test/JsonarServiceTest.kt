@@ -16,5 +16,4 @@ class JsonarServiceTest {
         analyseService.parser()
         println("11111")
     }
-
 }

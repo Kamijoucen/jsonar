@@ -1,4 +1,4 @@
 package com.kamijoucen.jsonar.analyse.node
 
-class MethodCallNode {
+class FieldDefinition {
 }

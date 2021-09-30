@@ -1,26 +1,34 @@
 package com.kamijoucen.jsonar.analyse.parser
 
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration
 import com.github.javaparser.ast.body.FieldDeclaration
 import com.github.javaparser.ast.body.MethodDeclaration
 import com.github.javaparser.ast.expr.FieldAccessExpr
 import com.github.javaparser.ast.expr.MethodCallExpr
 import com.github.javaparser.ast.visitor.GenericVisitorAdapter
 
-class NodeVisitor : GenericVisitorAdapter<Void, Void>() {
+object NodeVisitor : GenericVisitorAdapter<Void?, ParserContext>() {
 
-    override fun visit(n: FieldAccessExpr, arg: Void): Void {
+    override fun visit(n: ClassOrInterfaceDeclaration, arg: ParserContext?): Void? {
+
         return super.visit(n, arg)
     }
 
-    override fun visit(n: FieldDeclaration, arg: Void): Void {
+    override fun visit(n: FieldAccessExpr, arg: ParserContext): Void? {
+
         return super.visit(n, arg)
     }
 
-    override fun visit(n: MethodCallExpr, arg: Void): Void {
+    override fun visit(n: FieldDeclaration, arg: ParserContext): Void? {
         return super.visit(n, arg)
     }
 
-    override fun visit(n: MethodDeclaration, arg: Void): Void {
+    override fun visit(n: MethodCallExpr, arg: ParserContext): Void? {
+        println(n)
+        return super.visit(n, arg)
+    }
+
+    override fun visit(n: MethodDeclaration, arg: ParserContext): Void? {
         return super.visit(n, arg)
     }
 }

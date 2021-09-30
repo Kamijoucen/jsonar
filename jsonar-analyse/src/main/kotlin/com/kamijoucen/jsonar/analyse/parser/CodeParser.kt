@@ -1,14 +1,13 @@
 package com.kamijoucen.jsonar.analyse.parser
 
-import com.kamijoucen.jsonar.analyse.node.ClassNode
-import org.springframework.stereotype.Component
+import com.kamijoucen.jsonar.analyse.node.ClassDefinition
 
-@Component
-class CodeParser {
+interface CodeParser {
 
-    fun parse(paths: List<String>): Set<ClassNode> {
-
-        return emptySet()
-    }
+    /**
+     * 解析源码文件，并转换为中间对象
+     * 后期会实现golang等静态类型语言的解析
+     */
+    fun parse(paths: List<String>): Set<ClassDefinition>
 
 }
