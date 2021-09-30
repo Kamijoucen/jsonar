@@ -9,7 +9,16 @@ import com.github.javaparser.ast.visitor.GenericVisitorAdapter
 
 object NodeVisitor : GenericVisitorAdapter<Void?, ParserContext>() {
 
-    override fun visit(n: ClassOrInterfaceDeclaration, arg: ParserContext?): Void? {
+    override fun visit(n: ClassOrInterfaceDeclaration, arg: ParserContext): Void? {
+
+        val curClassNode = arg.currentClassNode
+
+        val extendedTypes = n.extendedTypes
+        if (!extendedTypes.isEmpty()) {
+            extendedTypes.forEach {
+                it.resolve().typeDeclaration
+            }
+        }
 
         return super.visit(n, arg)
     }

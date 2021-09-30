@@ -6,7 +6,7 @@ interface CodeParser {
 
     /**
      * 解析源码文件，并转换为中间对象
-     * 后期会实现golang等静态类型语言的解析
+     * 后期会实现golang,c#等静态类型语言的解析
      */
     fun parse(paths: List<String>): Set<ClassDefinition>
 
