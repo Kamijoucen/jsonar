@@ -1,5 +1,7 @@
 package com.kamijoucen.jsonar.analyse.node
 
+import com.google.common.collect.Sets
+
 data class ClassDefinition(val className: ClassName) {
 
     /**
@@ -20,11 +22,11 @@ data class ClassDefinition(val className: ClassName) {
     /**
      * 类继承的类型
      */
-    val extendedTypes: Set<ClassName> = setOf()
+    val extendedTypes = mutableSetOf<ClassName>()
 
     /**
      * 类实现的类型
      */
-    val implementedTypes: Set<ClassName> = setOf()
+    val implementedTypes = mutableSetOf<ClassName>()
 }
 

@@ -7,7 +7,7 @@ class ParserContext {
     /**
      * 当前处理中的节点
      */
-    var currentClassNode: ClassDefinition? = null
+    lateinit var currentClassNode: ClassDefinition
 
     /**
      * 所有的节点
