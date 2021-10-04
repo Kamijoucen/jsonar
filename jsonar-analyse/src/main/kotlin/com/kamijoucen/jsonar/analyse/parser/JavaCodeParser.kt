@@ -9,6 +9,7 @@ import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeS
 import com.github.javaparser.utils.SourceRoot
 import com.kamijoucen.jsonar.analyse.node.ClassDefinition
 import com.kamijoucen.jsonar.analyse.node.ClassName
+import com.kamijoucen.jsonar.analyse.node.NodeFactory
 import org.springframework.stereotype.Component
 import java.nio.file.Paths
 
@@ -30,7 +31,7 @@ class JavaCodeParser : CodeParser {
         for (basePath in paths) {
             buildOne(basePath, config, context)
         }
-        return context.nodes
+        return context.classDefinitions
     }
 
     /**
@@ -45,7 +46,8 @@ class JavaCodeParser : CodeParser {
         results.forEach {
             if (it.isSuccessful && it.result.isPresent) {
                 it.result.get().apply {
-                    context.currentClassNode = ClassDefinition(buildClassName(this))
+                    context.currentClassNode =
+                        NodeFactory.createClassNode(buildClassName(this))
                     this.accept(NodeVisitor, context)
                 }
             }

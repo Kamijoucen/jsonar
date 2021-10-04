@@ -27,6 +27,11 @@
             <artifactId>commons-collections4</artifactId>
             <version>${collections4.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.kamijoucen</groupId>
+            <artifactId>kirauid</artifactId>
+            <version>${kirauid.version}</version>
+        </dependency>
     </dependencies>
 
     <properties>

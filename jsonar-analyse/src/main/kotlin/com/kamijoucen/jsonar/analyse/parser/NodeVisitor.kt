@@ -45,6 +45,8 @@ object NodeVisitor : GenericVisitorAdapter<Void?, ParserContext>() {
     }
 
     override fun visit(n: FieldDeclaration, arg: ParserContext): Void? {
+        val currentClassNode = arg.currentClassNode
+        println(n)
         return super.visit(n, arg)
     }
 

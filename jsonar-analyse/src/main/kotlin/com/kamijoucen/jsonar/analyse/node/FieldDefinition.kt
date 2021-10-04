@@ -1,4 +1,5 @@
 package com.kamijoucen.jsonar.analyse.node
 
-class FieldDefinition {
+class FieldDefinition(override val uid: Long) : BaseNode {
+
 }

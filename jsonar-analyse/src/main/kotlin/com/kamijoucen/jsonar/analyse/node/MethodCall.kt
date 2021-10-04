@@ -1,4 +1,5 @@
 package com.kamijoucen.jsonar.analyse.node
 
-class MethodCall {
+class MethodCall(override val uid: Long) : BaseNode {
+
 }

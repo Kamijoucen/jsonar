@@ -1,3 +1,4 @@
 package com.kamijoucen.jsonar.analyse.node
 
-class MethodDefinition
+class MethodDefinition(override val uid: Long) : BaseNode {
+}

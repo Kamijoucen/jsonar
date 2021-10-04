@@ -1,8 +1,9 @@
 package com.kamijoucen.jsonar.analyse.node
 
-import com.google.common.collect.Sets
-
-data class ClassDefinition(val className: ClassName) {
+data class ClassDefinition(
+    override val uid: Long,
+    val className: ClassName
+) : BaseNode {
 
     /**
      * 所有成员定义
