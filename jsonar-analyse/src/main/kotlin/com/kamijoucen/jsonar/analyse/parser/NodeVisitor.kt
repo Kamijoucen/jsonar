@@ -5,37 +5,38 @@ import com.github.javaparser.ast.body.FieldDeclaration
 import com.github.javaparser.ast.body.MethodDeclaration
 import com.github.javaparser.ast.expr.FieldAccessExpr
 import com.github.javaparser.ast.expr.MethodCallExpr
+import com.github.javaparser.ast.type.ClassOrInterfaceType
 import com.github.javaparser.ast.visitor.GenericVisitorAdapter
 import com.kamijoucen.jsonar.analyse.node.ClassName
 
 object NodeVisitor : GenericVisitorAdapter<Void?, ParserContext>() {
 
+    /**
+     * 解析类的关联类型
+     */
+    private fun parserRelatedType(
+        relatedTypes: Collection<ClassOrInterfaceType>,
+        appendSet: MutableSet<ClassName>
+    ) {
+        relatedTypes.forEach { type ->
+            val typeOptional = type.resolve().typeDeclaration
+            if (typeOptional.isEmpty) {
+                appendSet.add(ClassName(type.nameWithScope))
+            } else {
+                val typeDeclaration = typeOptional.get()
+                appendSet.add(
+                    ClassName(typeDeclaration.name, typeDeclaration.packageName)
+                )
+            }
+        }
+    }
+
     override fun visit(n: ClassOrInterfaceDeclaration, arg: ParserContext): Void? {
         val currentNode = arg.currentClassNode
         // 解析继承
-        n.extendedTypes.forEach { type ->
-            val typeOptional = type.resolve().typeDeclaration
-            if (typeOptional.isEmpty) {
-                currentNode.extendedTypes.add(ClassName(type.nameWithScope))
-            } else {
-                val typeDeclaration = typeOptional.get()
-                currentNode.extendedTypes.add(
-                    ClassName(typeDeclaration.name, typeDeclaration.packageName)
-                )
-            }
-        }
+        parserRelatedType(n.extendedTypes, currentNode.extendedTypes)
         // 解析实现
-        n.implementedTypes.forEach { type ->
-            val typeOptional = type.resolve().typeDeclaration
-            if (typeOptional.isEmpty) {
-                currentNode.implementedTypes.add(ClassName(type.nameWithScope))
-            } else {
-                val typeDeclaration = typeOptional.get()
-                currentNode.implementedTypes.add(
-                    ClassName(typeDeclaration.name, typeDeclaration.packageName)
-                )
-            }
-        }
+        parserRelatedType(n.implementedTypes, currentNode.implementedTypes)
         return super.visit(n, arg)
     }
 
