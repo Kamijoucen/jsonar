@@ -44,7 +44,7 @@ class JavaCodeParser : CodeParser {
     ) {
         val results = SourceRoot(Paths.get(basePath), config).tryToParse()
         results.stream()
-            .filter { item -> item.isSuccessful && item.result.isPresent }
+            .filter { it.isSuccessful && it.result.isPresent }
             .forEach {
                 val unit = it.result.get()
                 val className = buildClassName(unit)
