@@ -6,6 +6,7 @@ object NodeIdGenerator {
 
     private val generator = DefaultIdGenerator.createDefaultGenerator()
 
-    fun generator(type: Long) = generator.nextId(type)
+    fun nextId(type: Long) = generator.nextId(type)
 
+    fun parser(id: Long) = generator.parseId(id)!!
 }

@@ -45,14 +45,13 @@ class JavaCodeParser : CodeParser {
         val results = SourceRoot(Paths.get(basePath), config).tryToParse()
         results.stream()
             .filter { it.isSuccessful && it.result.isPresent }
+            .map { it.result.get() }
             .forEach {
-                val unit = it.result.get()
-                val className = buildClassName(unit)
+                val className = buildClassName(it)
                 val currentClassNode = NodeFactory.createClassNode(className)
                 context.currentClassNode = currentClassNode
                 context.classDefinitions.add(currentClassNode)
-
-                unit.accept(NodeVisitor, context)
+                it.accept(NodeVisitor, context)
             }
     }
 
